@@ -8,9 +8,11 @@ Trial classes are limited to four students. A pending booking does not reserve a
 seat. The seat is assigned only when payment is completed successfully, and the
 database makes that decision inside one transaction.
 
-## Live demo
+## Live demo and walkthrough
 
-**https://ottodot-trial-booking.vercel.app**
+**Live demo:** https://ottodot-trial-booking.vercel.app
+
+**Video walkthrough:** https://youtu.be/za709NJ22nQ
 
 Deployed on Vercel with a hosted Supabase database in Singapore.
 
