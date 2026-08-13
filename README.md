@@ -8,6 +8,17 @@ Trial classes are limited to four students. A pending booking does not reserve a
 seat. The seat is assigned only when payment is completed successfully, and the
 database makes that decision inside one transaction.
 
+## Live demo
+
+**https://ottodot-trial-booking.vercel.app**
+
+Deployed on Vercel with a hosted Supabase database in Singapore.
+
+Everyone who opens it shares the same database, so the seeded scenarios may
+already have been used by an earlier visitor. In particular, the last-seat race
+depends on two specific bookings still being unpaid. Running the project locally
+gives a clean database and is the reliable way to reproduce every case.
+
 ## How to run the project
 
 ### Requirements
@@ -70,6 +81,12 @@ A teacher or admin can view the confirmed roster as either a page or JSON.
 | `/api/trial-classes/[classId]/roster` | The same roster as JSON |
 
 ## Verifying the edge cases
+
+The seeded parents and children are named positionally rather than
+realistically. The number identifies the parent and the letter identifies the
+sibling, so `Child 4B` belongs to `Parent 4`. I changed them from realistic
+names partway through because it was slow to remember which child already had a
+booking in which class while testing the duplicate and retry cases.
 
 Run this before repeating the seeded scenarios:
 
