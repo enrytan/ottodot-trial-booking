@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+/*
+ * Semantic tokens rather than raw colours in components.
+ *
+ * Every surface, line and muted text reference resolves through here, so light
+ * and dark stay consistent and neither theme is an afterthought bolted on with
+ * dark: variants scattered through the markup.
+ */
+/*
+ * Deliberately light-only.
+ *
+ * `color-scheme: light` pins native widgets -- select popups, scrollbars,
+ * radios -- to the light theme too, so a visitor whose OS is set to dark still
+ * gets a page that agrees with itself. Supporting both themes properly is more
+ * surface than this demo needs; committing to one is the cheaper honest choice.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --background: #fdfaf5;
+  --surface: #ffffff;
+  --surface-raised: #f9f1e8;
+  --line: #eee0d0;
+  /* Warm dark brown rather than black or slate -- keeps the whole page in one
+     temperature instead of putting cool text on a warm ground. */
+  --foreground: #33261c;
+  --muted: #7d6d5f;
+
+  /* Bright orange with dark brown text on it. White on this orange only
+     reaches ~2.9:1, which fails AA for button labels; dark brown clears 5:1
+     and keeps the accent bright rather than forcing a muddier shade. */
+  --accent: #f97316;
+  --accent-hover: #ea580c;
+  --accent-foreground: #3b1a05;
+
+  /* For accent-coloured TEXT on a light background, where the bright orange
+     would be unreadable. 4.6:1 against white. */
+  --accent-strong: #c2410c;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-line: var(--line);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-strong: var(--accent-strong);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* The scaffold hardcodes Arial here, which overrides the Geist font loaded
+     in layout.tsx. Use the variable instead. */
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* color-scheme handles this in most browsers, but option colours are
+   inconsistently inherited -- being explicit costs nothing. */
+option {
+  background-color: var(--surface);
+  color: var(--foreground);
 }
